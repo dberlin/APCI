@@ -59,7 +59,7 @@ ssize_t write_child_apci(struct file *filp, const char __user *buffer,
 	if (get_result != 0)
 		return get_result;
 	outb(write_data, cdata->ddata->regions[bar].start + bar_offset);
-	*off += 1;
+	*off = 0;
 	return 1;
 }
 
@@ -91,7 +91,7 @@ ssize_t read_child_apci(struct file *filp, char __user *buffer, size_t len,
 	if (put_result != 0)
 		return put_result;
 
-	*off = 1;
+	*off = 0;
 	return 1;
 }
 
