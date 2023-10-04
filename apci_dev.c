@@ -820,6 +820,7 @@ void *apci_alloc_driver(struct pci_dev *pdev, const struct pci_device_id *id)
 						   ddata->plx_region.length,
 						   "apci");
 			if (presource == NULL) {
+  case PCIe_DIO_24S:
 				/* We couldn't get the region.  We have only
 				 * allocated ddata so release it and return an
 				 * error.
