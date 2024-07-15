@@ -820,7 +820,7 @@ void *apci_alloc_driver(struct pci_dev *pdev, const struct pci_device_id *id)
 						   ddata->plx_region.length,
 						   "apci");
 			if (presource == NULL) {
-  case PCIe_DIO_24S:
+			case PCIe_DIO_24S:
 				/* We couldn't get the region.  We have only
 				 * allocated ddata so release it and return an
 				 * error.
@@ -1693,7 +1693,6 @@ irqreturn_t apci_interrupt(int irq, void *dev_id)
 			dma_addr_t base = ddata->dma_addr;
 			spin_lock(&(ddata->dma_data_lock));
 			if (ddata->dma_last_buffer == -1) {
-				notify_user = false;
 				apci_debug("ISR First IRQ");
 			} else if (ddata->dma_first_valid == -1) {
 				ddata->dma_first_valid = 0;
@@ -1783,12 +1782,10 @@ irqreturn_t apci_interrupt(int irq, void *dev_id)
 			return IRQ_NONE;
 		}
 
-		if (irq_event &
-		    (bmADIO_ADCTRIGGERStatus | bmADIO_DMADoneStatus)) {
+		if (irq_event & bmADIO_DMADoneStatus) {
 			dma_addr_t base = ddata->dma_addr;
 			spin_lock(&(ddata->dma_data_lock));
 			if (ddata->dma_last_buffer == -1) {
-				notify_user = false;
 				apci_debug("ISR First IRQ");
 			} else if (ddata->dma_first_valid == -1) {
 				ddata->dma_first_valid = 0;
