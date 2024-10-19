@@ -1,6 +1,6 @@
 #include "apci_fops.h"
 #include "apci_dev.h"
-
+address_type is_valid_addr(struct apci_my_info *driver_data, int bar, int addr);
 address_type is_valid_addr(struct apci_my_info *driver_data, int bar, int addr)
 {
 	/* if it is a valid bar */

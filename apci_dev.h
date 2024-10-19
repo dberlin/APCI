@@ -372,5 +372,7 @@ struct apci_child_info {
 int probe(struct pci_dev *dev, const struct pci_device_id *id);
 void remove(struct pci_dev *dev);
 void delete_driver(struct pci_dev *dev);
+void *bsearch(const void *key, const void *base, size_t num, size_t size,
+	      int (*cmp)(const void *key, const void *elt));
 
 #endif

@@ -38,6 +38,12 @@
 #define bmADIO_DMADoneEnable (1 << 2)
 #define bmADIO_ADCTRIGGERStatus (1 << 16)
 #define bmADIO_ADCTRIGGEREnable (1 << 0)
+void *apci_alloc_driver(struct pci_dev *pdev, const struct pci_device_id *id);
+void apci_free_driver(struct pci_dev *pdev);
+int destroy_child_devices(struct device *dev, void *data);
+irqreturn_t apci_interrupt(int irq, void *dev_id);
+int __init apci_init(void);
+int APCI_LOOKUP_ENTRY(int fx);
 
 /* PCI table construction */
 static struct pci_device_id ids[] = {
@@ -647,7 +653,6 @@ void *bsearch(const void *key, const void *base, size_t num, size_t size,
 
 	return NULL;
 }
-
 int APCI_LOOKUP_ENTRY(int fx)
 {
 	struct apci_lookup_table_entry driver_entry;
